@@ -1,0 +1,50 @@
+version: 2
+
+models:
+  - name: stg_osha__inspections
+    description: "Cleaned and standardized OSHA inspection records"
+    columns:
+      - name: inspection_id
+        description: "Unique inspection identifier"
+        tests:
+          - unique
+          - not_null
+      - name: open_date
+        description: "Date inspection was opened"
+        tests:
+          - not_null
+      - name: inspection_year
+        description: "Year inspection was opened"
+        tests:
+          - not_null
+      - name: state_code
+        description: "Cleaned state postal code"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA',
+                         'HI','ID','IL','IN','IA','KS','KY','LA','ME','MD',
+                         'MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ',
+                         'NM','NY','NC','ND','OH','OK','OR','PA','RI','SC',
+                         'SD','TN','TX','UT','VT','VA','WA','WV','WI','WY',
+                         'DC','PR','GU','VI','AS','MP']
+              config:
+                severity: warn
+  - name: stg_osha__violations
+    description: "Cleaned and standardized OSHA violation records"
+    columns:
+      - name: violation_key
+        description: "Composite unique key: activity_nr + citation_id"
+        tests:
+          - unique
+          - not_null
+      - name: inspection_id
+        description: "Foreign key to stg_osha__inspections"
+        tests:
+          - not_null
+      - name: current_penalty_amount
+        description: "Current assessed penalty in dollars"
+      - name: violation_type_desc
+        description: "Human readable violation type"
+        tests:
+          - not_null

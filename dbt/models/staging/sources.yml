@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: osha_raw
+    database: OSHA_DB
+    schema: RAW
+    tables:
+      - name: RAW_INSPECTIONS
+        description: "Raw OSHA inspection records loaded from DOL enforcement data"
+      - name: RAW_VIOLATIONS
+        description: "Raw OSHA violation records loaded from DOL enforcement data"

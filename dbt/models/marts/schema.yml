@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: mart_safety__industry_summary
+    description: "Violation and penalty trends by NAICS industry code and year"
+    columns:
+      - name: inspection_year
+        tests:
+          - not_null
+      - name: naics_code
+        tests:
+          - not_null
+      - name: total_inspections
+        tests:
+          - not_null
+
+  - name: mart_safety__state_trends
+    description: "Year over year safety trends by state"
+    columns:
+      - name: inspection_year
+        tests:
+          - not_null
+      - name: state_code
+        tests:
+          - not_null
+      - name: total_inspections
+        tests:
+          - not_null
+
+  - name: mart_safety__repeat_violators
+    description: "Establishments with multiple inspections"
+    columns:
+      - name: establishment_name
+        tests:
+          - not_null
+      - name: total_inspections
+        tests:
+          - not_null
+
+  - name: mart_safety__violation_types
+    description: "Violation type breakdown by year, state, and industry"
+    columns:
+      - name: inspection_year
+        tests:
+          - not_null
+      - name: violation_type_desc
+        tests:
+          - not_null

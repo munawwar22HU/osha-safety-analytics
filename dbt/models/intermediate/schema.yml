@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: int_inspections__enriched
+    description: "Inspections joined with violation summary metrics"
+    columns:
+      - name: inspection_id
+        tests:
+          - unique
+          - not_null
+      - name: total_violations
+        tests:
+          - not_null
+      - name: total_penalty_amount
+        tests:
+          - not_null
+
+  - name: int_violations__enriched
+    description: "Violations joined with inspection context"
+    columns:
+      - name: violation_key
+        tests:
+          - unique
+          - not_null
+      - name: inspection_id
+        tests:
+          - not_null
